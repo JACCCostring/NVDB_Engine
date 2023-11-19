@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libnvdb.a CMakeFiles/nvdb.dir/nvdb_autogen/mocs_compilation.cpp.o CMakeFiles/nvdb.dir/__/sources/nvdb_engine.cpp.o CMakeFiles/nvdb.dir/__/sources/road_object_type.cpp.o CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libnvdb.a
