@@ -220,6 +220,30 @@ __/sources/rest_http_handler.cpp.s:
 	cd "/Users/jacc/Cpp Examples/back_to_cmake/build" && $(MAKE) $(MAKESILENT) -f app/CMakeFiles/nvdb.dir/build.make app/CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.s
 .PHONY : __/sources/rest_http_handler.cpp.s
 
+__/sources/road_object.o: __/sources/road_object.cpp.o
+.PHONY : __/sources/road_object.o
+
+# target to build an object file
+__/sources/road_object.cpp.o:
+	cd "/Users/jacc/Cpp Examples/back_to_cmake/build" && $(MAKE) $(MAKESILENT) -f app/CMakeFiles/nvdb.dir/build.make app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o
+.PHONY : __/sources/road_object.cpp.o
+
+__/sources/road_object.i: __/sources/road_object.cpp.i
+.PHONY : __/sources/road_object.i
+
+# target to preprocess a source file
+__/sources/road_object.cpp.i:
+	cd "/Users/jacc/Cpp Examples/back_to_cmake/build" && $(MAKE) $(MAKESILENT) -f app/CMakeFiles/nvdb.dir/build.make app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.i
+.PHONY : __/sources/road_object.cpp.i
+
+__/sources/road_object.s: __/sources/road_object.cpp.s
+.PHONY : __/sources/road_object.s
+
+# target to generate assembly for a file
+__/sources/road_object.cpp.s:
+	cd "/Users/jacc/Cpp Examples/back_to_cmake/build" && $(MAKE) $(MAKESILENT) -f app/CMakeFiles/nvdb.dir/build.make app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.s
+.PHONY : __/sources/road_object.cpp.s
+
 __/sources/road_object_type.o: __/sources/road_object_type.cpp.o
 .PHONY : __/sources/road_object_type.o
 
@@ -334,6 +358,9 @@ help:
 	@echo "... __/sources/rest_http_handler.o"
 	@echo "... __/sources/rest_http_handler.i"
 	@echo "... __/sources/rest_http_handler.s"
+	@echo "... __/sources/road_object.o"
+	@echo "... __/sources/road_object.i"
+	@echo "... __/sources/road_object.s"
 	@echo "... __/sources/road_object_type.o"
 	@echo "... __/sources/road_object_type.i"
 	@echo "... __/sources/road_object_type.s"

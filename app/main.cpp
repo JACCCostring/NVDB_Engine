@@ -14,9 +14,11 @@ int main(int argc, char** argv){
     engine.init();
 
     QObject::connect(&engine, &nvdb::NVDBEngine::ready, [&]{
-        for (auto c: engine.core_chunk()) 
-            if (c.id == 83730093)
-                engine.next(c.href);
+        // do things here ...
+        engine.next(2);
+        // engine.next();
+        // engine.next();
+        // engine.next();
     });
 
     return a.exec();

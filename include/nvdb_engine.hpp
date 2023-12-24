@@ -39,8 +39,8 @@ namespace nvdb
 
             std::string get_endpoint_env() const;
             std::size_t road_objects_amount() const;
-            std::vector<core_next_chunk> core_chunk() const;
-            void next(const std::string &);
+            
+            void next(const std::size_t amount = 5);
 
             void init();
 
@@ -49,6 +49,8 @@ namespace nvdb
             void load_nvdb_objecttype_fromJson();
             void populate_core_chunk_container();
             void parse_nvdb_object_road(const std::string &);
+            
+            //std::vector<core_next_chunk> core_chunk() const;
 
               //overloaded private methods
             void init_type_v(const std::size_t);
@@ -61,16 +63,32 @@ namespace nvdb
             void fetching_ended();
             void done_populating_core_chunk();
             void ready();
+            void done_parsing_nvdb_obj();
 
         private:
-            QJsonDocument document;
+            // QJsonDocument document;
+
+            // nvdb::road_object road_objects_core;
 
             Rest::RestHttpHandler httpHandler_objectTypes;
             Rest::RestHttpHandler httpHandler_config;
             Rest::RestHttpHandler httpHandler_general;
-
+            
+            /*
+                this container will hold all road objects properties and geometry
+            */
             std::vector<nvdb::RoadObjectType> road_objects_type;
+
+            /*
+                this container will hold all nvdb ids and href per object but in chunks
+                so later in the code we can substract what it need to be substract from, and its easier
+            */
             std::vector<core_next_chunk> container_next_chunk;
+
+            /*
+                this container will hold all nvdb ids and it's assigned href per object
+                so href can be substract using nvdb id.
+            */
             std::map<std::size_t, std::string> nvdbids;
 
             core_next_chunk current_core_chunck;
@@ -84,6 +102,9 @@ namespace nvdb
 
             std::size_t counter;
             std::size_t __counter_next;
+
+            std::size_t __next__object_counter_parse;
+            std::size_t road_objects_to_fetch;
 
             std::size_t type_v;
             std::string type_n;

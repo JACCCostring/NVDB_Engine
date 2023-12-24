@@ -125,12 +125,27 @@ app/CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.s"
 	cd "/Users/jacc/Cpp Examples/back_to_cmake/build/app" && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/jacc/Cpp Examples/back_to_cmake/sources/rest_http_handler.cpp" -o CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.s
 
+app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o: app/CMakeFiles/nvdb.dir/flags.make
+app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o: /Users/jacc/Cpp\ Examples/back_to_cmake/sources/road_object.cpp
+app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o: app/CMakeFiles/nvdb.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/jacc/Cpp Examples/back_to_cmake/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o"
+	cd "/Users/jacc/Cpp Examples/back_to_cmake/build/app" && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o -MF CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o.d -o CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o -c "/Users/jacc/Cpp Examples/back_to_cmake/sources/road_object.cpp"
+
+app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/nvdb.dir/__/sources/road_object.cpp.i"
+	cd "/Users/jacc/Cpp Examples/back_to_cmake/build/app" && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/jacc/Cpp Examples/back_to_cmake/sources/road_object.cpp" > CMakeFiles/nvdb.dir/__/sources/road_object.cpp.i
+
+app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/nvdb.dir/__/sources/road_object.cpp.s"
+	cd "/Users/jacc/Cpp Examples/back_to_cmake/build/app" && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/jacc/Cpp Examples/back_to_cmake/sources/road_object.cpp" -o CMakeFiles/nvdb.dir/__/sources/road_object.cpp.s
+
 # Object files for target nvdb
 nvdb_OBJECTS = \
 "CMakeFiles/nvdb.dir/nvdb_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/nvdb.dir/__/sources/nvdb_engine.cpp.o" \
 "CMakeFiles/nvdb.dir/__/sources/road_object_type.cpp.o" \
-"CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.o"
+"CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.o" \
+"CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o"
 
 # External object files for target nvdb
 nvdb_EXTERNAL_OBJECTS =
@@ -139,9 +154,10 @@ app/libnvdb.a: app/CMakeFiles/nvdb.dir/nvdb_autogen/mocs_compilation.cpp.o
 app/libnvdb.a: app/CMakeFiles/nvdb.dir/__/sources/nvdb_engine.cpp.o
 app/libnvdb.a: app/CMakeFiles/nvdb.dir/__/sources/road_object_type.cpp.o
 app/libnvdb.a: app/CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.o
+app/libnvdb.a: app/CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o
 app/libnvdb.a: app/CMakeFiles/nvdb.dir/build.make
 app/libnvdb.a: app/CMakeFiles/nvdb.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/jacc/Cpp Examples/back_to_cmake/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libnvdb.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/jacc/Cpp Examples/back_to_cmake/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libnvdb.a"
 	cd "/Users/jacc/Cpp Examples/back_to_cmake/build/app" && $(CMAKE_COMMAND) -P CMakeFiles/nvdb.dir/cmake_clean_target.cmake
 	cd "/Users/jacc/Cpp Examples/back_to_cmake/build/app" && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/nvdb.dir/link.txt --verbose=$(VERBOSE)
 

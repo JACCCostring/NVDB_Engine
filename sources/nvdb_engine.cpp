@@ -9,7 +9,9 @@ namespace nvdb
     current_objs_amount{0},
     type_v{0},
     type_n{std::string()},
-    __counter_next{0}
+    __counter_next{0},
+    __next__object_counter_parse{0},
+    road_objects_to_fetch{0}
     {}
 
     void NVDBEngine::init(){
@@ -60,6 +62,7 @@ namespace nvdb
         if (! type_n.empty()) init_type_n(type_n); // if name type was set
 
         //getting the amount of total objects to fetch
+        // all object contain the amount to fetch
         current_objs_amount = road_objects_type[0].get_amount();
 
         httpHandler_config.set_endpoint(next_chunck_endpoint);
@@ -77,7 +80,7 @@ namespace nvdb
 
             next_chunck_endpoint = next_chunk["href"].toString().toStdString();
 
-            current_objects_amount_returned = metadata["returnert"].toInt();
+            current_objects_amount_returned = metadata["returnert"].toInt(); //not in used yet
             
             httpHandler_config.set_endpoint(next_chunck_endpoint);
             httpHandler_config.produce_data();
@@ -88,8 +91,6 @@ namespace nvdb
         //processing next chunk endpoint to collect nvdb ids and href/urls of nvdbids
         QObject::connect(this, &NVDBEngine::next_chunk_is_ready, [&]{
             auto doc = QJsonDocument::fromJson(httpHandler_config.buffer());
-
-            // qDebug() << next_chunck_endpoint;
 
             auto object = doc.object();
 
@@ -102,9 +103,6 @@ namespace nvdb
                 counter++;
             }
 
-            // std::cout << counter << std::endl;
-            // std::cout << current_objs_amount << std::endl;
-
             //if counter == to total object to be fetched, then this will be last chunk
             if (counter >= current_objs_amount) emit last_fetched_object();
         });
@@ -115,7 +113,7 @@ namespace nvdb
             emit fetching_ended();
         });
 
-        connect(this, &NVDBEngine::fetching_ended, [&]{ populate_core_chunk_container(); });
+        connect(this, &NVDBEngine::fetching_ended, [&]{ populate_core_chunk_container(); }); //it could be a slot instead a lambda call
         connect(this, &NVDBEngine::done_populating_core_chunk, [&]{ emit ready(); });
     }
 
@@ -147,14 +145,22 @@ namespace nvdb
 
         // connecting signals
         QObject::connect(&httpHandler_general, &Rest::RestHttpHandler::done, [&]{
+            /*
+                this metjod will parse especific properties and geometry
+                of all or some of the road objects
+            */
+
             QJsonDocument doc = QJsonDocument::fromJson(httpHandler_general.buffer());
+
+            // object that will be returned 
+            nvdb::road_object road_object;
 
             QJsonObject object = doc.object();
 
             auto geometry = object["geometri"].toObject(); //getting geometry of road object
             auto properties = object["egenskaper"].toArray(); //getting properties of the road object
             auto location = object["lokasjon"].toObject(); //getting location of road object
-
+            
             // from here we know geometri has srid and wkt
             // that is very important for us
 
@@ -164,8 +170,16 @@ namespace nvdb
             // qDebug() << geometry["wkt"];
             // qDebug() << properties;
 
+            road_object.set_nvdbid(container_next_chunk[__next__object_counter_parse].id);
+            road_object.set_geometry(geometry["wkt"].toString().toStdString());
+
             for (const auto& c: properties){
                 auto obj = c.toObject(); //inside egenskaper array json object
+
+                /*
+                    fix when parsing lista, text, geometri and different
+                    type of data from API, to cover more cases, for road objects properties
+                */
 
                 if (obj["datatype"] == "Liste"){ //if datatype it's a list then,
                     auto object_array = obj["innhold"].toArray();
@@ -173,28 +187,81 @@ namespace nvdb
                     for (const auto& json_obj: object_array){
                         auto val = json_obj.toObject();
 
-                        qDebug() << val["id"];
-                        qDebug() << val["navn"];
-                        qDebug() << val["verdi"];
+                        auto id = val["id"].toInt();
+                        auto name = val["navn"].toString().toStdString();
+                        auto value = val["verdi"].toString().toStdString();
+
+                         // add it as a road onject property
+                         road_object.add_property(id, name, value);
                     }
                 }
 
                 // if not Liste and it's Text for now, then
                 if (obj["datatype"] == "FlerverdiAttributt, Tekst"){
-                    qDebug() << obj["id"];
-                    qDebug() << obj["navn"];
-                    qDebug() << obj["verdi"];
+                    auto id = obj["id"].toInt();
+                    auto name = obj["navn"].toString().toStdString();
+                    auto value = obj["verdi"].toString().toStdString();
+
+                    // add it as a road onject property
+                    road_object.add_property(id, name, value);
                 }
             }
-        });
 
-        // 2 parse json
+            // object is ready
+
+            std::cout << road_object.nvdbid() << std::endl;
+
+            /*
+                the solution will be to iterate throug the rest of
+                container next chunk vector, but excluding the first one in index 0
+            */
+
+            auto next_href = container_next_chunk[__next__object_counter_parse].href;
+
+            httpHandler_general.set_endpoint(next_href);
+            httpHandler_general.produce_data();
+            
+            // if __next__object_counter_parse >= container_next_chunk then
+            // emit a signal that is finished fetching
+            if (__next__object_counter_parse >= container_next_chunk.size()) emit done_parsing_nvdb_obj();
+
+            /*
+                case when a range of road objects is especified to fetch, from user
+                if __next__object_counter_parser == road_objects_to_fetch, then stop fetching
+            */
+
+           if (__next__object_counter_parse == road_objects_to_fetch - 1) emit done_parsing_nvdb_obj();
+
+            __next__object_counter_parse++;
+        });
+        // end of lambda
+
+        //connecting done parsing nvdb objects signal
+        QObject::connect(this, &nvdb::NVDBEngine::done_parsing_nvdb_obj, [&]{ httpHandler_general.close(); });
     }
 
-    std::vector<core_next_chunk> NVDBEngine::core_chunk() const { return container_next_chunk; }
+    // std::vector<core_next_chunk> NVDBEngine::core_chunk() const { return container_next_chunk; }
 
-    void NVDBEngine::next(const std::string& href){
-        this->parse_nvdb_object_road(href);
+   void NVDBEngine::next(const std::size_t amount){
+        /*
+            next method will go throug all fetched road objects,
+            parse it and return the current parsed road object.
+
+            private method need to be call and this method will return
+            a concrete road object with properties and geometry.
+
+            private method: this->parse_nvdb_object_road(const std::string &)
+        */
+
+            road_objects_to_fetch = amount; //assigning amount of road objects
+
+            //substract the first object
+            auto obj = container_next_chunk[0];
+
+            // calling private method and giving href of each road obj as argument
+            this->parse_nvdb_object_road(obj.href);
+
+    //    return {};
     }
 
     void NVDBEngine::set_object_type(const std::size_t object_type_id){
