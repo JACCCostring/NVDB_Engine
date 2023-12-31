@@ -29,56 +29,61 @@ namespace nvdb
             Q_OBJECT
 
         public:
+            using vector_chunk = std::vector<nvdb::road_object>;
+
             NVDBEngine();
-            
-            void set_env(_env env);
 
             //overloaded methods
+            void download_road_objects(const std::size_t amount = 5);
             void set_object_type(const std::size_t);
             void set_object_type(const std::string &);
 
             std::string get_endpoint_env() const;
-            std::size_t road_objects_amount() const;
+            std::size_t road_object_total_amount() const;
             
-            void next(const std::size_t amount = 5);
-
+            void set_env(_env env);
+            vector_chunk chunk() const noexcept;
             void init();
 
         private: //private methods
-            void config_fetching();
+            std::size_t convert_type_name_to_value(const std::string &);
+            void parse_nvdb_object_road(const std::string &);
             void load_nvdb_objecttype_fromJson();
             void populate_core_chunk_container();
-            void parse_nvdb_object_road(const std::string &);
+            void config_fetching();
+            std::size_t find_object_type_index(std::size_t);
             
             //std::vector<core_next_chunk> core_chunk() const;
 
               //overloaded private methods
-            void init_type_v(const std::size_t);
-            void init_type_n(const std::string &);
+            bool init_type_n(const std::string &);
+            bool init_type_v(const std::size_t);
 
         signals:
-            void object_types_ready();
+            void status_download(const std::size_t);
+            void done_populating_core_chunk();
+            void done_parsing_nvdb_obj();
             void next_chunk_is_ready();
             void last_fetched_object();
+            void object_types_ready();
+            void done_downloading();
             void fetching_ended();
-            void done_populating_core_chunk();
             void ready();
-            void done_parsing_nvdb_obj();
 
         private:
-            // QJsonDocument document;
-
-            // nvdb::road_object road_objects_core;
-
-            Rest::RestHttpHandler httpHandler_objectTypes;
-            Rest::RestHttpHandler httpHandler_config;
-            Rest::RestHttpHandler httpHandler_general;
+            Rest::RestHttpHandler httpHandler_objectTypes; // only for object types
+            Rest::RestHttpHandler httpHandler_config; // only for configuration, before start fetching
+            Rest::RestHttpHandler httpHandler_general; // only for road objects parsing
             
-            /*
-                this container will hold all road objects properties and geometry
-            */
+            //this container will hold all road objects name, id type and nvdbid
             std::vector<nvdb::RoadObjectType> road_objects_type;
 
+            /*
+                this container will contain all the road objects parsed,
+                with it's geometry, nvdbid and properties, for later uses
+            */
+            vector_chunk _chunk_nvdb_object_;
+            
             /*
                 this container will hold all nvdb ids and href per object but in chunks
                 so later in the code we can substract what it need to be substract from, and its easier
@@ -91,14 +96,12 @@ namespace nvdb
             */
             std::map<std::size_t, std::string> nvdbids;
 
-            core_next_chunk current_core_chunck;
-
             _env current_env;
 
             std::string next_chunck_endpoint;
             std::string next_chunk_endpoint_internal;
-            std::size_t current_objects_amount_returned;
-            std::size_t current_objs_amount;
+            std::size_t amount_returned;
+            std::size_t total_objects;
 
             std::size_t counter;
             std::size_t __counter_next;

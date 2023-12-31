@@ -2,50 +2,54 @@
 
 #define __ROAD_OBJECT__
 
-#include <any>
-#include <map>
 #include <string>
 #include <utility>
+#include <vector>
+#include <map>
 
 namespace nvdb
 {
         struct schema_road_obj{
             std::size_t id;
             std::string property_name;
-            std::any value;
+            std::string value;
         };
 
     class road_object
     {
     public:
+        using vect_location = std::vector<std::size_t>;
+
         road_object() = default;
         
-        template<typename T>
-        void add_property(const std::size_t id, const std::string& property_name, const T& value){
-                
-                // code here
-                // make sure to cast T<> value to the correspon type, it can be any thing
+        void add_property(const std::size_t , const std::string&, const std::string&);
 
-                schema_road_obj obj;
+        std::map<std::string, schema_road_obj> properties() const noexcept;
 
-                obj.id = id;
-                obj.property_name = property_name;
-                obj.value = std::any_cast<decltype(value)>(value); // casting to the type of T
-
-                properties[obj.property_name] = obj; //adding property to container
-        }
-
-        schema_road_obj operator[] (const std::string &);
+        // schema_road_obj operator[] (const std::string &);
         
-        void set_nvdbid(const std::size_t);
         void set_geometry(const std::string &);
+        void set_nvdbid(const std::size_t);
+        void set_version(const std::size_t &);
+        void set_last_modified(const std::string &);
+        void add_municipality(const std::size_t);
+        void add_county(const std::size_t);
+
         std::string geometry() const;
         std::size_t nvdbid() const;
+        std::size_t version() const;
+        std::string last_modified() const;
+        vect_location municipalities() const ;
+        vect_location counties() const;
 
     private:
-        std::map<std::string, schema_road_obj> properties;
-        
+        std::map<std::string, schema_road_obj> props;
+        std::vector<std::size_t> _municipalities;
+        std::vector<std::size_t> _counties;
+
         std::string _geometry;
+        std::size_t _version;
+        std::string _last_modified;
         std::size_t _nvdbid;
     };
 }

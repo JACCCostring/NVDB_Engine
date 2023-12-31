@@ -40,51 +40,63 @@ namespace {
 struct qt_meta_stringdata_CLASSnvdbSCOPENVDBEngineENDCLASS_t {};
 static constexpr auto qt_meta_stringdata_CLASSnvdbSCOPENVDBEngineENDCLASS = QtMocHelpers::stringData(
     "nvdb::NVDBEngine",
-    "object_types_ready",
+    "status_download",
     "",
+    "std::size_t",
+    "done_populating_core_chunk",
+    "done_parsing_nvdb_obj",
     "next_chunk_is_ready",
     "last_fetched_object",
+    "object_types_ready",
+    "done_downloading",
     "fetching_ended",
-    "done_populating_core_chunk",
-    "ready",
-    "done_parsing_nvdb_obj"
+    "ready"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSnvdbSCOPENVDBEngineENDCLASS_t {
-    uint offsetsAndSizes[18];
+    uint offsetsAndSizes[24];
     char stringdata0[17];
-    char stringdata1[19];
+    char stringdata1[16];
     char stringdata2[1];
-    char stringdata3[20];
-    char stringdata4[20];
-    char stringdata5[15];
-    char stringdata6[27];
-    char stringdata7[6];
-    char stringdata8[22];
+    char stringdata3[12];
+    char stringdata4[27];
+    char stringdata5[22];
+    char stringdata6[20];
+    char stringdata7[20];
+    char stringdata8[19];
+    char stringdata9[17];
+    char stringdata10[15];
+    char stringdata11[6];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSnvdbSCOPENVDBEngineENDCLASS_t::offsetsAndSizes) + ofs), len 
 Q_CONSTINIT static const qt_meta_stringdata_CLASSnvdbSCOPENVDBEngineENDCLASS_t qt_meta_stringdata_CLASSnvdbSCOPENVDBEngineENDCLASS = {
     {
         QT_MOC_LITERAL(0, 16),  // "nvdb::NVDBEngine"
-        QT_MOC_LITERAL(17, 18),  // "object_types_ready"
-        QT_MOC_LITERAL(36, 0),  // ""
-        QT_MOC_LITERAL(37, 19),  // "next_chunk_is_ready"
-        QT_MOC_LITERAL(57, 19),  // "last_fetched_object"
-        QT_MOC_LITERAL(77, 14),  // "fetching_ended"
-        QT_MOC_LITERAL(92, 26),  // "done_populating_core_chunk"
-        QT_MOC_LITERAL(119, 5),  // "ready"
-        QT_MOC_LITERAL(125, 21)   // "done_parsing_nvdb_obj"
+        QT_MOC_LITERAL(17, 15),  // "status_download"
+        QT_MOC_LITERAL(33, 0),  // ""
+        QT_MOC_LITERAL(34, 11),  // "std::size_t"
+        QT_MOC_LITERAL(46, 26),  // "done_populating_core_chunk"
+        QT_MOC_LITERAL(73, 21),  // "done_parsing_nvdb_obj"
+        QT_MOC_LITERAL(95, 19),  // "next_chunk_is_ready"
+        QT_MOC_LITERAL(115, 19),  // "last_fetched_object"
+        QT_MOC_LITERAL(135, 18),  // "object_types_ready"
+        QT_MOC_LITERAL(154, 16),  // "done_downloading"
+        QT_MOC_LITERAL(171, 14),  // "fetching_ended"
+        QT_MOC_LITERAL(186, 5)   // "ready"
     },
     "nvdb::NVDBEngine",
-    "object_types_ready",
+    "status_download",
     "",
+    "std::size_t",
+    "done_populating_core_chunk",
+    "done_parsing_nvdb_obj",
     "next_chunk_is_ready",
     "last_fetched_object",
+    "object_types_ready",
+    "done_downloading",
     "fetching_ended",
-    "done_populating_core_chunk",
-    "ready",
-    "done_parsing_nvdb_obj"
+    "ready"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -96,23 +108,27 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSnvdbSCOPENVDBEngineENDCLASS[] = 
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       7,       // signalCount
+       9,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   56,    2, 0x06,    1 /* Public */,
-       3,    0,   57,    2, 0x06,    2 /* Public */,
-       4,    0,   58,    2, 0x06,    3 /* Public */,
-       5,    0,   59,    2, 0x06,    4 /* Public */,
-       6,    0,   60,    2, 0x06,    5 /* Public */,
-       7,    0,   61,    2, 0x06,    6 /* Public */,
-       8,    0,   62,    2, 0x06,    7 /* Public */,
+       1,    1,   68,    2, 0x06,    1 /* Public */,
+       4,    0,   71,    2, 0x06,    3 /* Public */,
+       5,    0,   72,    2, 0x06,    4 /* Public */,
+       6,    0,   73,    2, 0x06,    5 /* Public */,
+       7,    0,   74,    2, 0x06,    6 /* Public */,
+       8,    0,   75,    2, 0x06,    7 /* Public */,
+       9,    0,   76,    2, 0x06,    8 /* Public */,
+      10,    0,   77,    2, 0x06,    9 /* Public */,
+      11,    0,   78,    2, 0x06,   10 /* Public */,
 
  // signals: parameters
+    QMetaType::Void, 0x80000000 | 3,    2,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -133,19 +149,24 @@ Q_CONSTINIT const QMetaObject nvdb::NVDBEngine::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSnvdbSCOPENVDBEngineENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<NVDBEngine, std::true_type>,
-        // method 'object_types_ready'
+        // method 'status_download'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const std::size_t, std::false_type>,
+        // method 'done_populating_core_chunk'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'done_parsing_nvdb_obj'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'next_chunk_is_ready'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'last_fetched_object'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'object_types_ready'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'done_downloading'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'fetching_ended'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'done_populating_core_chunk'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'ready'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'done_parsing_nvdb_obj'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -157,68 +178,83 @@ void nvdb::NVDBEngine::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         auto *_t = static_cast<NVDBEngine *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->object_types_ready(); break;
-        case 1: _t->next_chunk_is_ready(); break;
-        case 2: _t->last_fetched_object(); break;
-        case 3: _t->fetching_ended(); break;
-        case 4: _t->done_populating_core_chunk(); break;
-        case 5: _t->ready(); break;
-        case 6: _t->done_parsing_nvdb_obj(); break;
+        case 0: _t->status_download((*reinterpret_cast< std::add_pointer_t<std::size_t>>(_a[1]))); break;
+        case 1: _t->done_populating_core_chunk(); break;
+        case 2: _t->done_parsing_nvdb_obj(); break;
+        case 3: _t->next_chunk_is_ready(); break;
+        case 4: _t->last_fetched_object(); break;
+        case 5: _t->object_types_ready(); break;
+        case 6: _t->done_downloading(); break;
+        case 7: _t->fetching_ended(); break;
+        case 8: _t->ready(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (NVDBEngine::*)();
-            if (_t _q_method = &NVDBEngine::object_types_ready; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _t = void (NVDBEngine::*)(const std::size_t );
+            if (_t _q_method = &NVDBEngine::status_download; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (NVDBEngine::*)();
-            if (_t _q_method = &NVDBEngine::next_chunk_is_ready; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &NVDBEngine::done_populating_core_chunk; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
             }
         }
         {
             using _t = void (NVDBEngine::*)();
-            if (_t _q_method = &NVDBEngine::last_fetched_object; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &NVDBEngine::done_parsing_nvdb_obj; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 2;
                 return;
             }
         }
         {
             using _t = void (NVDBEngine::*)();
-            if (_t _q_method = &NVDBEngine::fetching_ended; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &NVDBEngine::next_chunk_is_ready; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 3;
                 return;
             }
         }
         {
             using _t = void (NVDBEngine::*)();
-            if (_t _q_method = &NVDBEngine::done_populating_core_chunk; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &NVDBEngine::last_fetched_object; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 4;
                 return;
             }
         }
         {
             using _t = void (NVDBEngine::*)();
-            if (_t _q_method = &NVDBEngine::ready; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &NVDBEngine::object_types_ready; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 5;
                 return;
             }
         }
         {
             using _t = void (NVDBEngine::*)();
-            if (_t _q_method = &NVDBEngine::done_parsing_nvdb_obj; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &NVDBEngine::done_downloading; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 6;
                 return;
             }
         }
+        {
+            using _t = void (NVDBEngine::*)();
+            if (_t _q_method = &NVDBEngine::fetching_ended; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 7;
+                return;
+            }
+        }
+        {
+            using _t = void (NVDBEngine::*)();
+            if (_t _q_method = &NVDBEngine::ready; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 8;
+                return;
+            }
+        }
     }
-    (void)_a;
 }
 
 const QMetaObject *nvdb::NVDBEngine::metaObject() const
@@ -240,56 +276,69 @@ int nvdb::NVDBEngine::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 9)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 9;
     }
     return _id;
 }
 
 // SIGNAL 0
-void nvdb::NVDBEngine::object_types_ready()
+void nvdb::NVDBEngine::status_download(const std::size_t _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void nvdb::NVDBEngine::next_chunk_is_ready()
+void nvdb::NVDBEngine::done_populating_core_chunk()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 
 // SIGNAL 2
-void nvdb::NVDBEngine::last_fetched_object()
+void nvdb::NVDBEngine::done_parsing_nvdb_obj()
 {
     QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 
 // SIGNAL 3
-void nvdb::NVDBEngine::fetching_ended()
+void nvdb::NVDBEngine::next_chunk_is_ready()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
 }
 
 // SIGNAL 4
-void nvdb::NVDBEngine::done_populating_core_chunk()
+void nvdb::NVDBEngine::last_fetched_object()
 {
     QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
 }
 
 // SIGNAL 5
-void nvdb::NVDBEngine::ready()
+void nvdb::NVDBEngine::object_types_ready()
 {
     QMetaObject::activate(this, &staticMetaObject, 5, nullptr);
 }
 
 // SIGNAL 6
-void nvdb::NVDBEngine::done_parsing_nvdb_obj()
+void nvdb::NVDBEngine::done_downloading()
 {
     QMetaObject::activate(this, &staticMetaObject, 6, nullptr);
+}
+
+// SIGNAL 7
+void nvdb::NVDBEngine::fetching_ended()
+{
+    QMetaObject::activate(this, &staticMetaObject, 7, nullptr);
+}
+
+// SIGNAL 8
+void nvdb::NVDBEngine::ready()
+{
+    QMetaObject::activate(this, &staticMetaObject, 8, nullptr);
 }
 QT_WARNING_POP
