@@ -803,6 +803,7 @@
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/arm_neon.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdarg.h \
   /Users/jacc/Cpp\ Examples/back_to_cmake/include/rest_http_handler.hpp \
+  /Users/jacc/Cpp\ Examples/back_to_cmake/include/road_object.hpp \
   /Users/jacc/Cpp\ Examples/back_to_cmake/include/road_object_type.hpp \
   /Users/jacc/Qt/6.6.0/macos/lib/QtCore.framework/Versions/A/Headers/QByteArray \
   /Users/jacc/Qt/6.6.0/macos/lib/QtCore.framework/Versions/A/Headers/QDeadlineTimer \

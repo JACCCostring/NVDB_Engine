@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/nvdb.dir/__/sources/nvdb_engine.cpp.o.d"
   "CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.o"
   "CMakeFiles/nvdb.dir/__/sources/rest_http_handler.cpp.o.d"
+  "CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o"
+  "CMakeFiles/nvdb.dir/__/sources/road_object.cpp.o.d"
   "CMakeFiles/nvdb.dir/__/sources/road_object_type.cpp.o"
   "CMakeFiles/nvdb.dir/__/sources/road_object_type.cpp.o.d"
   "CMakeFiles/nvdb.dir/nvdb_autogen/mocs_compilation.cpp.o"

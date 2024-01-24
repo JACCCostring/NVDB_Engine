@@ -3,7 +3,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 
-add_library(nvdb STATIC ../sources/nvdb_engine.cpp ../sources/road_object_type.cpp ../sources/rest_http_handler.cpp)
+add_library(nvdb STATIC ../sources/nvdb_engine.cpp ../sources/road_object_type.cpp ../sources/rest_http_handler.cpp ../sources/road_object.cpp)
 target_include_directories(nvdb PUBLIC "../include")
 
 find_package(Qt6 CONFIG REQUIRED COMPONENTS core)

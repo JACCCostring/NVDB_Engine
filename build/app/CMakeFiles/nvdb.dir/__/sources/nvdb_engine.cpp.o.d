@@ -1164,4 +1164,5 @@ app/CMakeFiles/nvdb.dir/__/sources/nvdb_engine.cpp.o: \
   /Users/jacc/Qt/6.6.0/macos/lib/QtCore.framework/Headers/qxmlstream.h \
   /Users/jacc/Qt/6.6.0/macos/lib/QtCore.framework/Headers/qxpfunctional.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iostream \
+  /Users/jacc/Cpp\ Examples/back_to_cmake/app/../include/road_object.hpp \
   /Users/jacc/Qt/6.6.0/macos/lib/QtCore.framework/Headers/QDebug
